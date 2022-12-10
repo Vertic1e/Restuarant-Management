@@ -1,0 +1,342 @@
+from tkinter import *
+import tkinter.messagebox
+import random
+from datetime import datetime
+from PIL import ImageTk, Image
+
+root = Tk()
+root.geometry("1600x800+0+0")
+space = ' '
+root.title(200*space+"Restaurant Management System")
+
+coverFrame = Frame(root, bd=10, pady=2, relief = RIDGE)
+coverFrame.grid()
+
+coverMainFrame = Frame(coverFrame, bd=10, pady=2, width = 1350, height = 700, bg = 'cadet blue', relief = RIDGE)
+coverMainFrame.grid()
+
+MainFrame = Frame(coverMainFrame, bd=5,width = 1350, height = 700, pady = 2, relief = RIDGE)
+MainFrame.grid()
+
+Tops = Frame(MainFrame,  width=1600, height=50, bg='cadet blue', bd=10, relief = SUNKEN)
+Tops.grid(row=0,column=0)
+
+Tops2 = Frame(MainFrame,  width=1600, height=700, bg='cadet blue', bd=10, relief = SUNKEN)
+Tops2.grid(row=1,column=0)
+
+f1 = Frame(Tops2,  width=800, height=600, bd=10, relief = SUNKEN)
+f1.grid(row=0,column=0)
+
+f1a = Frame(f1,  width=800, height=600, bd=10, relief = SUNKEN)
+f1a.grid(row=0,column=0)
+
+f1b = Frame(f1,  width=800, height=100, bd=10, relief = SUNKEN)
+f1b.grid(row=1,column=0)
+
+f2 = Frame(Tops2,  width=300, height=700, bd=10, relief = SUNKEN)
+f2.grid(row=0,column=1)
+
+lblTitle = Label(Tops, font=('arial',50,'bold'), text='Restaurant Management System', fg='white', bg='cadet blue', bd=10)
+lblTitle.grid(row=0, column=0, padx=122)
+
+#---------------------------------------
+#calculator
+text_input = StringVar()
+operator = ''
+display = Entry(f2, font=('arial', 20,'bold'), textvariable = text_input, bd=30, insertwidth = 4,
+                bg ='powder blue', justify='right').grid(columnspan=4)
+btn7 = Button(f2, padx=16, bd=8, fg='black', font= ('arial', 20,'bold'),
+              text='7', command=lambda:btnClick(7)).grid(row=1, column=0)
+btn8 = Button(f2, padx=16, bd=8, fg='black', font= ('arial', 20,'bold'),
+              text='8', command=lambda:btnClick(8)).grid(row=1, column=1)
+btn9 = Button(f2, padx=16, bd=8, fg='black', font= ('arial', 20,'bold'),
+              text='9', command=lambda:btnClick(9)).grid(row=1, column=2)
+btnadd = Button(f2, padx=16, bd=8, fg='black', font= ('arial', 20,'bold'),
+              text='+', command=lambda:btnClick('+')).grid(row=1, column=3)
+btn4 = Button(f2, padx=16, bd=8, fg='black', font= ('arial', 20,'bold'),
+              text='4', command=lambda:btnClick(4)).grid(row=2, column=0)
+btn5 = Button(f2, padx=16, bd=8, fg='black', font= ('arial', 20,'bold'),
+              text='5', command=lambda:btnClick(5)).grid(row=2, column=1)
+btn6 = Button(f2, padx=16, bd=8, fg='black', font= ('arial', 20,'bold'),
+              text='6', command=lambda:btnClick(6)).grid(row=2, column=2)
+btnmin = Button(f2, padx=16, bd=8, fg='black', font= ('arial', 20,'bold'),
+              text='-', command=lambda:btnClick('-')).grid(row=2, column=3)
+btn1 = Button(f2, padx=16, bd=8, fg='black', font= ('arial', 20,'bold'),
+              text='1', command=lambda:btnClick(1)).grid(row=3, column=0)
+btn2 = Button(f2, padx=16, bd=8, fg='black', font= ('arial', 20,'bold'),
+              text='2', command=lambda:btnClick(2)).grid(row=3, column=1)
+btn3 = Button(f2, padx=16, bd=8, fg='black', font= ('arial', 20,'bold'),
+              text='3', command=lambda:btnClick(3)).grid(row=3, column=2)
+btnmul = Button(f2, padx=16, bd=8, fg='black', font= ('arial', 20,'bold'),
+              text='*', command=lambda:btnClick('*')).grid(row=3, column=3)
+btndot = Button(f2, padx=16, bd=8, fg='black', font= ('arial', 20,'bold'),
+              text='.', command=lambda:btnClick('.')).grid(row=4, column=0)
+btn0 = Button(f2, padx=16, bd=8, fg='black', font= ('arial', 20,'bold'),
+              text='0', command=lambda:btnClick(0)).grid(row=4, column=1)
+btndiv = Button(f2, padx=16, bd=8, fg='black', font= ('arial', 20,'bold'),
+              text='/', command=lambda:btnClick('/')).grid(row=4, column=2)
+btnequ = Button(f2, padx=16, bd=8, fg='black', font= ('arial', 20,'bold'),
+              text='=', command=lambda:btnEqualsInput()).grid(row=4, column=3)
+btnc = Button(f2, padx=16, bd=8, fg='black', font= ('arial', 20,'bold'),
+              text='C', command=lambda:btnClearDisplay()).grid(row=5, column=0)
+btn00 = Button(f2, padx=16, bd=8, fg='black', font= ('arial', 20,'bold'),
+              text='00', command=lambda:btnClick('00')).grid(row=5, column=1)
+def btnClick(numbers):
+    global operator
+    operator = operator + str(numbers)
+    text_input.set(operator)
+
+def btnClearDisplay():
+    global operator
+    operator = ''
+    text_input.set(operator)
+def btnEqualsInput():
+    global operator
+    sumup = str(eval(operator))
+    text_input.set(sumup)
+    operator = ''
+#------------------------------------------
+#Menu
+rand= StringVar()
+Fries = StringVar()
+Burger = StringVar()
+Filet = StringVar()
+Burger = StringVar()
+Tax = StringVar()
+SubTotal = StringVar()
+Total = StringVar()
+Service_Charge = StringVar()
+Drinks = StringVar()
+Cost = StringVar()
+Chicken_Burger = StringVar()
+Cheese_Burger = StringVar()
+
+var1 = IntVar()
+var2 = IntVar()
+var3 = IntVar()
+var4 = IntVar()
+var5 = IntVar()
+var6 = IntVar()
+
+rand.set('0')
+Fries.set('0')
+Burger.set('0')
+Filet.set('0')
+Drinks.set('0')
+Chicken_Burger.set('0')
+Cheese_Burger.set('0')
+
+
+def costFries():
+    if(var1.get()==1):
+        txtFries.configure(state=NORMAL)
+        txtFries.focus()
+        txtFries.delete('0', END)
+        Fries.set('')
+    elif (var1.get()==0):
+        txtFries.configure(state=DISABLED)
+        Fries.set('0')
+
+def costBurger():
+    if(var2.get()==1):
+        txtBurger.configure(state=NORMAL)
+        txtBurger.focus()
+        txtBurger.delete('0', END)
+        Burger.set('')
+    elif (var2.get()==0):
+        txtBurger.configure(state=DISABLED)
+        Burger.set('0')
+
+def costFilet():
+    if(var3.get()==1):
+        txtFilet.configure(state=NORMAL)
+        txtFilet.focus()
+        txtFilet.delete('0', END)
+        Filet.set('')
+    elif (var3.get()==0):
+        txtFilet.configure(state=DISABLED)
+        Filet.set('0')
+
+def costDrinks():
+    if(var4.get()==1):
+        txtDrinks.configure(state=NORMAL)
+        txtDrinks.focus()
+        txtDrinks.delete('0', END)
+        Drinks.set('')
+    elif (var4.get()==0):
+        txtDrinks.configure(state=DISABLED)
+        Drinks.set('0')
+
+def costChickenBurger():
+    if(var5.get()==1):
+        txtCBurger.configure(state=NORMAL)
+        txtCBurger.focus()
+        txtCBurger.delete('0', END)
+        Chicken_Burger.set('')
+    elif (var5.get()==0):
+        txtCBurger.configure(state=DISABLED)
+        Chicken_Burger.set('0')
+
+def costCheeseBurger():
+    if(var6.get()==1):
+        txtChBurger.configure(state=NORMAL)
+        txtChBurger.focus()
+        txtChen_Burger.set('')
+    elif (var6.get()==0):
+        txtChBurger.configure(state=DISABLED)
+        Cheese_Burger.set('0')
+
+def reset():
+    Fries.set('0')
+    Burger.set('0')
+    Filet.set('0')
+    Drinks.set('0')
+    Chicken_Burger.set('0')
+    Cheese_Burger.set('0')
+    Tax.set('')
+    SubTotal.set('')
+    Total.set('')
+    Service_Charge.set('')
+    Cost.set('')
+    txtFries.configure(state=DISABLED)
+    txtBurger.configure(state=DISABLED)
+    txtFilet.configure(state=DISABLED)
+    txtDrinks.configure(state=DISABLED)
+    txtChBurger.configure(state=DISABLED)
+    txtCBurger.configure(state=DISABLED)
+    var1.set(0)
+    var2.set(0)
+    var3.set(0)
+    var4.set(0)
+    var5.set(0)
+    var6.set(0)
+    
+def iExit():
+    iExit = tkinter.messagebox.askyesno('Restaurant Management System', 'Confirm if you want to exit')
+    if iExit > 0:
+        root.destroy()
+        return
+def totalCost():
+    rand.set(int(rand.get())+1)
+
+    costOfFries = float(Fries.get()) * 2.00
+    costOfDrink = float(Drinks.get()) * 1.00
+    costOfFilet = float(Filet.get()) * 5.50
+    costOfBurger = float(Burger.get()) * 5.00
+    costOfChickenBurger = float(Chicken_Burger.get()) * 4.50
+    costOfCheeseBurger = float(Cheese_Burger.get()) * 6.75
+
+    cost = (costOfFries+costOfDrink+costOfFilet+costOfBurger+
+                               costOfChickenBurger+costOfCheeseBurger)
+
+    tax = (costOfFries+costOfDrink+costOfFilet+costOfBurger+
+                               costOfChickenBurger+costOfCheeseBurger)* 0.15
+
+    service_Charge = (costOfFries+costOfDrink+costOfFilet+costOfBurger+
+                               costOfChickenBurger+costOfCheeseBurger) / 99
+    subTotal = tax+service_Charge
+    total = cost+tax+service_Charge
+    Cost.set(str('$%.2f' %cost))
+    Tax.set(str('$%.2f' %tax))
+    Service_Charge.set(str('$%.2f' %service_Charge))
+    SubTotal.set(str('$%.2f' %subTotal))
+    Total.set(str('$%.2f' %total))
+#------------------------------------------
+
+lblRef = Label(f1a, font=('arial',16,'bold'), text='Reference', fg='white', bg='cadet blue', bd=10)
+lblRef.grid(row=0, column=0, sticky = W)
+txtReference = Entry(f1a, font=('arial',16,'bold'), textvariable=rand, bd=10, bg='cadet blue')
+txtReference.grid(row=0, column=1)
+
+chkFries = Checkbutton(f1a, font=('arial',16,'bold'), text='Fries', variable=var1, onvalue=1,
+                      command=costFries, offvalue=0).grid(row=1, column=0, sticky = W)
+
+txtFries = Entry(f1a, font=('arial',16,'bold'), textvariable=Fries, bd=10, bg='cadet blue',
+                     justify='right', state=DISABLED)
+txtFries.grid(row=1, column=1)
+
+chkBurger = Checkbutton(f1a, font=('arial',16,'bold'), text='Burger', variable=var2, onvalue=1,
+                        command=costBurger,offvalue=0).grid(row=2, column=0, sticky = W)
+
+txtBurger = Entry(f1a, font=('arial',16,'bold'), textvariable=Burger, bd=10, bg='cadet blue',
+                     justify='right', state=DISABLED)
+txtBurger.grid(row=2, column=1)
+
+chkFilet = Checkbutton(f1a, font=('arial',16,'bold'), text='Filet', variable=var3, onvalue=1,
+                        command=costFilet,offvalue=0).grid(row=3, column=0, sticky = W)
+
+txtFilet = Entry(f1a, font=('arial',16,'bold'), textvariable=Filet, bd=10, bg='cadet blue',
+                     justify='right', state=DISABLED)
+txtFilet.grid(row=3, column=1)
+
+
+chkCBurger = Checkbutton(f1a, font=('arial',16,'bold'), text='Chicken_Burger', variable=var5, onvalue=1,
+                        command=costChickenBurger,offvalue=0).grid(row=4, column=0, sticky = W)
+
+txtCBurger = Entry(f1a, font=('arial',16,'bold'), textvariable=Chicken_Burger, bd=10, bg='cadet blue',
+                     justify='right', state=DISABLED)
+txtCBurger.grid(row=4, column=1)
+
+chkChBurger = Checkbutton(f1a, font=('arial',16,'bold'), text='Cheese_Burger', variable=var6, onvalue=1,
+                        command=costCheeseBurger,offvalue=0).grid(row=5, column=0, sticky = W)
+
+txtChBurger = Entry(f1a, font=('arial',16,'bold'), textvariable=Cheese_Burger, bd=10, bg='cadet blue',
+                     justify='right', state=DISABLED)
+txtChBurger.grid(row=5, column=1)
+
+
+chkDrinks = Checkbutton(f1a, font=('arial',16,'bold'), text='Drinks', variable=var4, onvalue=1,
+                        command=costDrinks,offvalue=0).grid(row=0, column=2, sticky = W,pady=5)
+
+txtDrinks = Entry(f1a, font=('arial',16,'bold'), textvariable=Drinks, bd=10, bg='cadet blue',
+                     justify='right', state=DISABLED)
+txtDrinks.grid(row=0, column=3,pady = 5)
+
+lblCost = Label(f1a, font=('arial',16,'bold'), text='Cost of Meal', bd=2, anchor='w')
+lblCost.grid(row=1, column=2, sticky = W,pady=5)
+
+txtCost = Entry(f1a, font=('arial',16,'bold'), textvariable=Cost, bd=10, bg='#ffffff',
+                     justify='right', insertwidth = 4)
+txtCost.grid(row=1, column=3,pady = 5)
+
+lblService = Label(f1a, font=('arial',16,'bold'), text='Service Charge', bd=2, anchor='w')
+lblService.grid(row=2, column=2, sticky = W,pady=5)
+
+txtService = Entry(f1a, font=('arial',16,'bold'), textvariable=Service_Charge, bd=10, bg='#ffffff',
+                     justify='right', insertwidth = 4)
+txtService.grid(row=2, column=3,pady = 5)
+
+lblStateTax = Label(f1a, font=('arial',16,'bold'), text='State Tax', bd=2, anchor='w')
+lblStateTax.grid(row=3, column=2, sticky = W,pady=5)
+
+txtStateTax = Entry(f1a, font=('arial',16,'bold'), textvariable=Tax, bd=10, bg='#ffffff',
+                     justify='right', insertwidth = 4)
+txtStateTax.grid(row=3, column=3,pady = 5)
+
+lblSubTotal = Label(f1a, font=('arial',16,'bold'), text='Sub Total', bd=2, anchor='w')
+lblSubTotal.grid(row=4, column=2, sticky = W,pady=5)
+
+txtSubTotal = Entry(f1a, font=('arial',16,'bold'), textvariable=SubTotal, bd=10, bg='#ffffff',
+                     justify='right', insertwidth = 4)
+txtSubTotal.grid(row=4, column=3,pady = 5)
+
+lblTotalCost = Label(f1a, font=('arial',16,'bold'), text='Total Cost', bd=2, anchor='w')
+lblTotalCost.grid(row=5, column=2, sticky = W,pady=5)
+
+txtTotalCost = Entry(f1a, font=('arial',16,'bold'), textvariable=Total, bd=10, bg='#ffffff',
+                     justify='right', insertwidth = 4)
+txtTotalCost.grid(row=5, column=3,pady = 5)
+
+#------------------------------------------Button--------------------------------------
+
+btnTotal = Button(f1b, padx=17, pady=8, bd=0, fg='white', font=('arial', 17, 'bold'),
+                  command = totalCost,width=17, text='Total', bg='cadet blue',).grid(row=0, column=0, pady=5, padx=5)
+
+btnReset = Button(f1b, padx=17, pady=8, bd=0, fg='white', font=('arial', 17, 'bold'),
+                  command =reset,width=17, text='Reset', bg='cadet blue',).grid(row=0, column=1, pady=5, padx=5)
+
+btnExit = Button(f1b, padx=17, pady=8, bd=0, fg='white', font=('arial', 17, 'bold'),
+                  command = iExit,width=17, text='Exit', bg='cadet blue',).grid(row=0, column=2, pady=5, padx=5)
+
+
+root.mainloop()
